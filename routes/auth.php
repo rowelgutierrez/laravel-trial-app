@@ -62,6 +62,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+    Route::name('creditor.')->prefix('creditor')->group(function() {
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+                    ->name('logout');
+    });
+
+    Route::name('debtor.')->prefix('debtor')->group(function() {
+        Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+                    ->name('logout');
+    });
 });

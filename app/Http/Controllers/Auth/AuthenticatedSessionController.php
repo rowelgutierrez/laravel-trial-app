@@ -28,13 +28,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $required_role = str_replace('/', '', $request->route()->getPrefix());
+        $prefix = str_replace('/', '', $request->route()->getPrefix());
 
-        $request->authenticate($required_role);
+        $request->authenticate($prefix);
 
         $request->session()->regenerate();
 
-        return redirect()->intended($required_role . RouteServiceProvider::HOME);
+        $required_role = Auth::user()->roles->pluck('name')[0];
+
+        return redirect()->to($required_role . RouteServiceProvider::HOME);
     }
 
     /**
@@ -45,12 +47,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $required_role = Auth::user()->roles->pluck('name')[0];
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect($required_role . '/');
     }
 }
