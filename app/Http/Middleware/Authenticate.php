@@ -15,7 +15,9 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('login');
+            $prefix = str_replace('/', '', $request->route()->getPrefix());
+            $prefix = empty($prefix)? 'creditor' : $prefix;
+            return route($prefix . '.login');
         }
     }
 }

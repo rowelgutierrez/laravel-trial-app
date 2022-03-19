@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'affiliate_creditor' => 'affiliate-creditor',
-    'debtor'             => 'debtor'
+    'creditor' => 'creditor',
+    'debtor'   => 'debtor'
 ];

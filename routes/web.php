@@ -18,8 +18,24 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+$shared_routes = [
+    'dashboard',
+];
+
+Route::name('creditor.')->prefix('creditor')->group(function() use($shared_routes) {
+    foreach ($shared_routes as $route) {
+        Route::get('/' . $route, function () {
+            return view($route);
+        })->middleware(['auth'])->name($route);
+    }
+});
+
+Route::name('debtor.')->prefix('debtor')->group(function() use($shared_routes) {
+    foreach ($shared_routes as $route) {
+        Route::get('/' . $route, function () {
+            return view($route);
+        })->middleware(['auth'])->name($route);
+    }
+});
 
 require __DIR__.'/auth.php';
