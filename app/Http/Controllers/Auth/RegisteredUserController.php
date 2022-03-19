@@ -51,6 +51,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        $prefix = str_replace('/', '', $request->route()->getPrefix());
+
+        return redirect($prefix . RouteServiceProvider::HOME);
     }
 }

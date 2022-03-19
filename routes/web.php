@@ -15,16 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
-    return view('dashboard');
+    return redirect('creditor/dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 $shared_routes = [
+    '', // root
     'dashboard',
 ];
 
 Route::name('creditor.')->prefix('creditor')->group(function() use($shared_routes) {
     foreach ($shared_routes as $route) {
-        Route::get('/' . $route, function () {
+        Route::get('/' . $route, function () use($route) {
             return view($route);
         })->middleware(['auth'])->name($route);
     }
@@ -32,7 +33,7 @@ Route::name('creditor.')->prefix('creditor')->group(function() use($shared_route
 
 Route::name('debtor.')->prefix('debtor')->group(function() use($shared_routes) {
     foreach ($shared_routes as $route) {
-        Route::get('/' . $route, function () {
+        Route::get('/' . $route, function () use($route) {
             return view($route);
         })->middleware(['auth'])->name($route);
     }

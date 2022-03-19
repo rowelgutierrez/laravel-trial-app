@@ -28,11 +28,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $required_role = str_replace('/', '', $request->route()->getPrefix());
+
+        $request->authenticate($required_role);
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended($required_role . RouteServiceProvider::HOME);
     }
 
     /**
