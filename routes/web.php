@@ -29,22 +29,24 @@ $shared_routes = [
     ],
 ];
 
-// Route::name('creditor.')->prefix('creditor')->group(['middleware' => ['role:creditor']], function() use($shared_routes) {
 Route::name('creditor.')->prefix('creditor')->group(function() use($shared_routes) {
-    foreach ($shared_routes as $route) {
-        Route::get('/' . $route['route'], function () use($route) {
-            return view($route['view']);
-        })->middleware(['auth'])->name($route['route']);
-    }
+    Route::group(['middleware' => ['role:creditor']], function() use($shared_routes) {
+        foreach ($shared_routes as $route) {
+            Route::get('/' . $route['route'], function () use($route) {
+                return view($route['view']);
+            })->middleware(['auth'])->name($route['route']);
+        }
+    });
 });
 
-// Route::name('debtor.')->prefix('debtor')->group(['middleware' => ['role:debtor']], function() use($shared_routes) {
 Route::name('debtor.')->prefix('debtor')->group(function() use($shared_routes) {
-    foreach ($shared_routes as $route) {
-        Route::get('/' . $route['route'], function () use($route) {
-            return view($route['view']);
-        })->middleware(['auth'])->name($route['route']);
-    }
+    Route::group(['middleware' => ['role:debtor']], function() use($shared_routes) {
+        foreach ($shared_routes as $route) {
+            Route::get('/' . $route['route'], function () use($route) {
+                return view($route['view']);
+            })->middleware(['auth'])->name($route['route']);
+        }
+    });
 });
 
 require __DIR__.'/auth.php';
