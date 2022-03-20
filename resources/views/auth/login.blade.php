@@ -48,9 +48,9 @@ $prefix = str_replace('/', '', request()->route()->getPrefix());
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                @if ($prefix === config('rbac.role.creditor'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route($prefix . '.register') }}">
+                        {{ __('Don\'t have an account yet?') }}
                     </a>
                 @endif
 
