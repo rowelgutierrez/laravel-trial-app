@@ -11,6 +11,7 @@ docker run --rm \
 ```
 
 ## How to run
+- Open terminal and cd to project root directory
 - `./vendor/bin/sail up -d`
 - `./vendor/bin/sail artisan migrate`
 - `./vendor/bin/sail artisan db:seed`
