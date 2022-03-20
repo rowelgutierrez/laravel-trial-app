@@ -1,6 +1,6 @@
-## Prerequisite
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- Run: 
+## Prerequisites
+- Download [Docker](https://www.docker.com/products/docker-desktop/)
+- Install Sail: 
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
