@@ -24,9 +24,11 @@ $debtors_route = $prefix . '.debtors';
                     <x-nav-link :href="route($dashboard_route)" :active="request()->routeIs($dashboard_route)">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route($debtors_route)" :active="request()->routeIs($debtors_route)">
-                        {{ __('Debtors') }}
-                    </x-nav-link>
+                    @role(config('rbac.role.creditor'))
+                        <x-nav-link :href="route($debtors_route)" :active="request()->routeIs($debtors_route)">
+                            {{ __('Debtors') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 
@@ -78,9 +80,11 @@ $debtors_route = $prefix . '.debtors';
             <x-responsive-nav-link :href="route($dashboard_route)" :active="request()->routeIs($dashboard_route)">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route($debtors_route)" :active="request()->routeIs($debtors_route)">
-                {{ __('Debtors') }}
-            </x-responsive-nav-link>
+            @role(config('rbac.role.creditor'))
+                <x-responsive-nav-link :href="route($debtors_route)" :active="request()->routeIs($debtors_route)">
+                    {{ __('Debtors') }}
+                </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

@@ -49,7 +49,7 @@ Route::name('debtor.')->prefix('debtor')->group(function() use($shared_routes) {
         foreach ($shared_routes as $route) {
             Route::get('/' . $route['route'], function () use($route) {
                 return view($route['view']);
-            })->middleware(['auth'])->name($route['route']);
+            })->middleware(['auth', 'require_password_change'])->name($route['route']);
         }
     });
 });

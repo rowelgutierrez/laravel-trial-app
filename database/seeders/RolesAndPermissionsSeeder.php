@@ -19,8 +19,10 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $role = Role::create(['name' => config('role.creditor')]);
-        $role = Role::create(['name' => config('role.debtor')]);
+        $role = Role::create(['name' => config('rbac.role.creditor')]);
+        $role = Role::create(['name' => config('rbac.role.debtor')]);
+
+        Permission::create(['name' => config('rbac.permission.full_access')]);
 
         // // create permissions
         // Permission::create(['name' => 'edit articles']);

@@ -45,7 +45,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->assignRole(config('role.creditor'));
+        $user->assignRole(config('rbac.role.creditor'));
+        $user->givePermissionTo(config('rbac.permission.full_access'));
 
         event(new Registered($user));
 

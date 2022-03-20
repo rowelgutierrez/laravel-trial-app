@@ -34,7 +34,7 @@ class DebtorsController extends Controller
             'password' => Hash::make('password'),
         ]);
 
-        $user->assignRole(config('role.debtor'));
+        $user->assignRole(config('rbac.role.debtor'));
 
         $debtor = Debtor::create([
             'company_name' => $request->company_name,

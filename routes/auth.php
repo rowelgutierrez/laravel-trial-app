@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -72,7 +73,13 @@ Route::middleware('auth')->group(function () {
     Route::name('debtor.')->prefix('debtor')->group(function() {
         Route::group(['middleware' => ['role:debtor']], function() {
             Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                        ->name('logout');
+                ->name('logout');
         });
+
+        Route::get('change-password', [ChangePasswordController::class, 'create'])
+            ->name('change.password');
+
+        Route::post('change-password', [ChangePasswordController::class, 'store'])
+            ->name('change.password');
     });
 });
