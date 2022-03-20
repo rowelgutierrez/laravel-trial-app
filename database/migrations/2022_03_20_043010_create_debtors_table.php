@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('debtors', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('company_name');
             $table->string('company_address');
             $table->foreign('user_id')->references('id')->on('users');

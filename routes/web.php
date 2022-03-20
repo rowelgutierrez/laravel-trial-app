@@ -39,6 +39,8 @@ Route::name('creditor.')->prefix('creditor')->group(function() use($shared_route
         }
 
         Route::get('debtors', [DebtorsController::class, 'index'])->name('debtors');
+        Route::get('debtor/new', [DebtorsController::class, 'new'])->name('debtor.new');
+        Route::post('debtor', [DebtorsController::class, 'create'])->name('debtor');
     });
 });
 

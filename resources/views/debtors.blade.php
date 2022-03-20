@@ -12,16 +12,16 @@
                     <table class="w-full whitespace-no-wrapw-full whitespace-no-wrap">
                         <thead>
                             <tr class="font-black">
-                                <td class="px-6 py-4"><strong>Company name</strong></td>
-                                <td class="px-6 py-4"><strong>Company address</strong></td>
-                                <td class="px-6 py-4"><strong>Contact name</strong></td>
-                                <td class="px-6 py-4"><strong>Contact email</strong></td>
+                                <td class="px-6 py-4"><strong>{{ __('Company name') }}</strong></td>
+                                <td class="px-6 py-4"><strong>{{ __('Company address') }}</strong></td>
+                                <td class="px-6 py-4"><strong>{{ __('Contact name') }}</strong></td>
+                                <td class="px-6 py-4"><strong>{{ __('Contact email') }}</strong></td>
                             </tr>
                         </thead>
                         @foreach ($debtors as $debtor)
                             <tr>
-                                <td class="px-6 py-4">This is a company</td>
-                                <td class="px-6 py-4">Helm's Deep</td>
+                                <td class="px-6 py-4">{{ $debtor->company_name }}</td>
+                                <td class="px-6 py-4">{{ $debtor->company_address }}</td>
                                 <td class="px-6 py-4">{{ $debtor->user->name }}</td>
                                 <td class="px-6 py-4">{{ $debtor->user->email }}</td>
                             </tr>
@@ -29,6 +29,10 @@
                     </table>
                 </div>
             </div>
+
+            <x-button class="mt-8" onclick="window.location='{{ route('creditor.debtor.new') }}'">
+                {{ __('Add Debtor') }}
+            </x-button>
         </div>
     </div>
 </x-app-layout>
