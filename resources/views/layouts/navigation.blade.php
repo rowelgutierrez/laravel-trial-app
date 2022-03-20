@@ -3,6 +3,7 @@
 $prefix = str_replace('/', '', request()->route()->getPrefix());
 $dashboard_route = $prefix . '.dashboard';
 $logout_route = $prefix . '.logout';
+$debtors_route = $prefix . '.debtors';
 
 @endphp
 
@@ -22,6 +23,9 @@ $logout_route = $prefix . '.logout';
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route($dashboard_route)" :active="request()->routeIs($dashboard_route)">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route($debtors_route)" :active="request()->routeIs($debtors_route)">
+                        {{ __('Debtors') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -73,6 +77,9 @@ $logout_route = $prefix . '.logout';
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route($dashboard_route)" :active="request()->routeIs($dashboard_route)">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route($debtors_route)" :active="request()->routeIs($debtors_route)">
+                {{ __('Debtors') }}
             </x-responsive-nav-link>
         </div>
 

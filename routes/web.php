@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DebtorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::name('creditor.')->prefix('creditor')->group(function() use($shared_route
                 return view($route['view']);
             })->middleware(['auth'])->name($route['route']);
         }
+
+        Route::get('debtors', [DebtorsController::class, 'index'])->name('debtors');
     });
 });
 
