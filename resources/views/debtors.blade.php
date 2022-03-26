@@ -25,9 +25,14 @@
                                 <td class="px-6 py-4">{{ $debtor->user->name }}</td>
                                 <td class="px-6 py-4 relative">
                                     {{ $debtor->user->email }}
-                                    <span class="absolute right-0 hidden group-hover:inline-block">
-                                        Edit
-                                    </span>
+                                    <div class="absolute gap-1 top-1/4 right-0 hidden group-hover:block group-hover:flex">
+                                        <span onclick="window.location='{{ route('creditor.debtor.edit', ['id' => $debtor->id]) }}'">
+                                            @svg('edit', ['class' => 'fill-green-600'])
+                                        </span>
+                                        <span>
+                                            @svg('delete', ['class' => 'fill-red-600'])
+                                        </span>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

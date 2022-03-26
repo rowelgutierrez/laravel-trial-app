@@ -21,6 +21,12 @@ class DebtorsController extends Controller
         return view('debtor-form');
     }
 
+    public function edit(Request $request) {
+        $debtor = Debtor::find($request->route('id'));
+
+        return view('debtor-form', compact('debtor'));
+    }
+
     public function create(Request $request) {
         $request->validate([
             'company_name' => ['required', 'string', 'max:255'],
@@ -44,6 +50,23 @@ class DebtorsController extends Controller
         ]);
 
         event(new Registered($user));
+
+        return redirect('creditor/debtors');
+    }
+
+    public function update(Request $request) {
+        $request->validate([
+            'company_name' => ['required', 'string', 'max:255'],
+            'company_address' => ['required', 'string', 'max:255'],
+            'contact_name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $debtor = Debtor::find($request->route('id'));
+        $debtor->company_name = $request->company_name;
+        $debtor->company_address = $request->company_address;
+        $debtor->user->name = $request->contact_name;
+        
+        $debtor->save();
 
         return redirect('creditor/debtors');
     }

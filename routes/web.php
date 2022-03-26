@@ -40,6 +40,8 @@ Route::name('creditor.')->prefix('creditor')->group(function() use($shared_route
 
         Route::get('debtors', [DebtorsController::class, 'index'])->name('debtors');
         Route::get('debtor/new', [DebtorsController::class, 'new'])->name('debtor.new');
+        Route::get('debtor/{id}', [DebtorsController::class, 'edit'])->name('debtor.edit');
+        Route::put('debtor/{id}', [DebtorsController::class, 'update'])->name('debtor.update');
         Route::post('debtor', [DebtorsController::class, 'create'])->name('debtor');
     });
 });
