@@ -51,7 +51,7 @@ class DebtorsController extends Controller
 
         event(new Registered($user));
 
-        return redirect('creditor/debtors');
+        return redirect('creditor/debtors')->with('success', 'Debtor successfully created');
     }
 
     public function update(Request $request) {
@@ -68,13 +68,13 @@ class DebtorsController extends Controller
         
         $debtor->save();
 
-        return redirect('creditor/debtors');
+        return redirect('creditor/debtors')->with('success', 'Debtor successfully updated');
     }
 
     public function delete(Request $request) {
         $debtor = Debtor::find($request->route('id'));
         $debtor->delete();
         $debtor->user->delete();
-        return back();
+        return back()->with('success', 'Debtor successfully deleted');
     }
 }
