@@ -70,4 +70,11 @@ class DebtorsController extends Controller
 
         return redirect('creditor/debtors');
     }
+
+    public function delete(Request $request) {
+        $debtor = Debtor::find($request->route('id'));
+        $debtor->delete();
+        $debtor->user->delete();
+        return back();
+    }
 }
