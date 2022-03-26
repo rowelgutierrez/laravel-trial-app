@@ -19,11 +19,16 @@
                             </tr>
                         </thead>
                         @foreach ($debtors as $debtor)
-                            <tr>
+                            <tr class="cursor-pointer group">
                                 <td class="px-6 py-4">{{ $debtor->company_name }}</td>
                                 <td class="px-6 py-4">{{ $debtor->company_address }}</td>
                                 <td class="px-6 py-4">{{ $debtor->user->name }}</td>
-                                <td class="px-6 py-4">{{ $debtor->user->email }}</td>
+                                <td class="px-6 py-4 relative">
+                                    {{ $debtor->user->email }}
+                                    <span class="absolute right-0 hidden group-hover:inline-block">
+                                        Edit
+                                    </span>
+                                </td>
                             </tr>
                         @endforeach
                     </table>
