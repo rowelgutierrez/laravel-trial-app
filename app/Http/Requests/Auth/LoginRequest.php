@@ -53,7 +53,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if(! Auth::user()->hasRole($required_role)) {
+        if(! Auth::user()->hasRole($required_role) || ! Auth::user()->hasPermissionTo(config('rbac.permission.full_access'))) {
             Auth::logout();
 
             RateLimiter::hit($this->throttleKey());

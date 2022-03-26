@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Registered;
 use App\Models\Debtor;
 use App\Models\User;
@@ -31,7 +32,7 @@ class DebtorsController extends Controller
         $user = User::create([
             'name' => $request->contact_name,
             'email' => $request->email,
-            'password' => Hash::make('password'),
+            'password' => Hash::make(Str::random(16)),
         ]);
 
         $user->assignRole(config('rbac.role.debtor'));

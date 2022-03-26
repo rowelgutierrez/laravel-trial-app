@@ -35,7 +35,7 @@ Route::name('creditor.')->prefix('creditor')->group(function() use($shared_route
         foreach ($shared_routes as $route) {
             Route::get('/' . $route['route'], function () use($route) {
                 return view($route['view']);
-            })->middleware(['auth'])->name($route['route']);
+            })->middleware(['auth', 'verified'])->name($route['route']);
         }
 
         Route::get('debtors', [DebtorsController::class, 'index'])->name('debtors');
@@ -49,7 +49,7 @@ Route::name('debtor.')->prefix('debtor')->group(function() use($shared_routes) {
         foreach ($shared_routes as $route) {
             Route::get('/' . $route['route'], function () use($route) {
                 return view($route['view']);
-            })->middleware(['auth', 'require_password_change'])->name($route['route']);
+            })->middleware(['auth', 'verified', 'require_password_change'])->name($route['route']);
         }
     });
 });
