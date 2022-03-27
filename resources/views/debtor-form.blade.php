@@ -13,7 +13,7 @@
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                    <form method="POST" action="{{ isset($debtor)? route('creditor.debtor.update', ['id' => $debtor->id]) : route('creditor.debtor') }}">
+                    <form method="POST" action="{{ isset($debtor)? route('creditor.debtor.update', ['id' => $debtor->id]) : route('creditor.debtor') }}" onsubmit="formLoading()">
                         @if(isset($debtor))
                             @method('PUT')
                         @endif
@@ -49,17 +49,31 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
-                            <x-button type="button" class="ml-4" onclick="window.location='{{ route('creditor.debtors') }}'">
+                            <x-button type="button" class="form-btn ml-4" onclick="window.location='{{ route('creditor.debtors') }}'">
                                 {{ __('Cancel') }}
                             </x-button>
 
-                            <x-button class="ml-4">
+                            <x-button class="form-btn ml-4">
                                 {{ __('Save') }}
                             </x-button>
+
+                            @svg('loading', ['x-ref' => 'spinner', 'class' => 'spinner hidden w-12 h-12 !ml-2'])
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script type="text/javascript">
+        function formLoading() {
+            const formButtons = document.querySelectorAll('.form-btn');
+            formButtons.forEach((btn) => {
+                btn.disabled = true;
+            });
+
+            const spinner = document.querySelector('.spinner');
+            spinner.classList.remove('hidden');
+        }
+    </script>
 </x-app-layout>

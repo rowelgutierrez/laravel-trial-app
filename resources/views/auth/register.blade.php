@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('creditor.register') }}">
+        <form method="POST" action="{{ route('creditor.register') }}" onsubmit="formLoading()">
             @csrf
 
             <!-- Name -->
@@ -50,10 +50,24 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4">
+                <x-button class="form-btn ml-4">
                     {{ __('Register') }}
                 </x-button>
+
+                @svg('loading', ['x-ref' => 'spinner', 'class' => 'spinner hidden w-12 h-12 !ml-2'])
             </div>
         </form>
+    
+        <script type="text/javascript">
+            function formLoading() {
+                const formButtons = document.querySelectorAll('.form-btn');
+                formButtons.forEach((btn) => {
+                    btn.disabled = true;
+                });
+
+                const spinner = document.querySelector('.spinner');
+                spinner.classList.remove('hidden');
+            }
+        </script>
     </x-auth-card>
 </x-guest-layout>
